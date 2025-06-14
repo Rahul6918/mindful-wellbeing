@@ -41,7 +41,7 @@ const MeditationCard = ({
       <CardContent>
         <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-            <div className="w-8 h-8 bg-primary rounded-full"></div>
+            <div className="w-8 h-8 bg-primary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
           </div>
         </div>
         {isLocked ? (

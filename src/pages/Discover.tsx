@@ -64,7 +64,7 @@ const Discover = () => {
             <div className="flex flex-col md:flex-row items-start gap-6">
               <div className="w-full md:w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center">
                 <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
-                  <div className="w-8 h-8 bg-primary rounded-full"></div>
+                  <div className="w-8 h-8 bg-primary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
                 </div>
               </div>
               
@@ -105,7 +105,7 @@ const Discover = () => {
                     'from-orange-500/20 to-red-500/20'
                   } rounded-t-lg flex items-center justify-center`}>
                     <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center">
-                      <div className="w-10 h-10 bg-primary rounded-full"></div>
+                      <div className="w-10 h-10 bg-primary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
                     </div>
                   </div>
                   

@@ -34,8 +34,8 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full animate-bounce"></div>
-            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full animate-pulse"></div>
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
+            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
           </div>
         </div>
       </div>
