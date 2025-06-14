@@ -30,7 +30,7 @@ const HeroSection = () => {
             <div className="w-80 h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center">
               <div className="w-60 h-60 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full flex items-center justify-center">
                 <div className="w-40 h-40 bg-primary/20 rounded-full flex items-center justify-center">
-                  <div className="w-20 h-20 bg-primary rounded-full animate-pulse"></div>
+                  <div className="w-20 h-20 bg-primary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
                 </div>
               </div>
             </div>
