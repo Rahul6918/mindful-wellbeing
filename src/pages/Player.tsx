@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,13 +15,11 @@ import {
   ArrowLeft 
 } from "lucide-react";
 import { meditationData } from "@/data/meditations";
+import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
 const Player = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState([80]);
   const [isLiked, setIsLiked] = useState(false);
 
   // Find meditation by ID (simplified)
@@ -32,23 +30,26 @@ const Player = () => {
   ];
   
   const meditation = allMeditations.find(m => m.id === id) || allMeditations[0];
-  const totalDuration = parseInt(meditation.duration) * 60; // Convert to seconds
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentTime(prev => {
-          if (prev >= totalDuration) {
-            setIsPlaying(false);
-            return totalDuration;
-          }
-          return prev + 1;
-        });
-      }, 1000);
+  // Use audio player hook
+  const {
+    isPlaying,
+    currentTime,
+    duration,
+    volume,
+    isLoading,
+    togglePlayPause,
+    seek,
+    skipForward,
+    skipBackward,
+    changeVolume,
+  } = useAudioPlayer({
+    src: meditation.audioUrl,
+    onEnded: () => {
+      // Handle meditation completion
+      console.log('Meditation completed');
     }
-    return () => clearInterval(interval);
-  }, [isPlaying, totalDuration]);
+  });
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -57,7 +58,11 @@ const Player = () => {
   };
 
   const handleSeek = (value: number[]) => {
-    setCurrentTime(value[0]);
+    seek(value[0]);
+  };
+
+  const handleVolumeChange = (value: number[]) => {
+    changeVolume(value[0] / 100);
   };
 
   return (
@@ -104,28 +109,35 @@ const Player = () => {
             {/* Progress Bar */}
             <div className="mb-6">
               <Slider
-                value={[currentTime]}
-                max={totalDuration}
+                value={[Math.floor(currentTime)]}
+                max={Math.floor(duration) || 100}
                 step={1}
                 onValueChange={handleSeek}
                 className="mb-2"
+                disabled={isLoading}
               />
               <div className="flex justify-between text-sm text-muted-foreground">
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(totalDuration)}</span>
+                <span>{formatTime(Math.floor(currentTime))}</span>
+                <span>{formatTime(Math.floor(duration))}</span>
               </div>
             </div>
 
             {/* Main Controls */}
             <div className="flex items-center justify-center gap-4 mb-6">
-              <Button variant="ghost" size="lg">
+              <Button 
+                variant="ghost" 
+                size="lg"
+                onClick={() => skipBackward()}
+                disabled={isLoading}
+              >
                 <SkipBack className="h-6 w-6" />
               </Button>
               
               <Button 
                 size="lg" 
                 className="h-16 w-16 rounded-full"
-                onClick={() => setIsPlaying(!isPlaying)}
+                onClick={togglePlayPause}
+                disabled={isLoading}
               >
                 {isPlaying ? (
                   <Pause className="h-8 w-8" />
@@ -134,7 +146,12 @@ const Player = () => {
                 )}
               </Button>
               
-              <Button variant="ghost" size="lg">
+              <Button 
+                variant="ghost" 
+                size="lg"
+                onClick={() => skipForward()}
+                disabled={isLoading}
+              >
                 <SkipForward className="h-6 w-6" />
               </Button>
             </div>
@@ -143,13 +160,13 @@ const Player = () => {
             <div className="flex items-center gap-3">
               <Volume2 className="h-4 w-4 text-muted-foreground" />
               <Slider
-                value={volume}
+                value={[Math.round(volume * 100)]}
                 max={100}
                 step={1}
-                onValueChange={setVolume}
+                onValueChange={handleVolumeChange}
                 className="flex-1"
               />
-              <span className="text-sm text-muted-foreground w-10">{volume[0]}%</span>
+              <span className="text-sm text-muted-foreground w-10">{Math.round(volume * 100)}%</span>
             </div>
           </CardContent>
         </Card>
@@ -157,7 +174,7 @@ const Player = () => {
         {/* Session Info */}
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground mb-2">
-            {isPlaying ? "Playing now..." : "Paused"}
+            {isLoading ? "Loading..." : isPlaying ? "Playing now..." : "Paused"}
           </p>
           <div className="flex justify-center gap-4 text-sm text-muted-foreground">
             <span>Duration: {meditation.duration}</span>

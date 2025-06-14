@@ -6,7 +6,8 @@ export const meditationData = {
       description: "A simple introduction to mindful breathing",
       duration: "3 min",
       category: "Basics",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "2", 
@@ -14,7 +15,8 @@ export const meditationData = {
       description: "Gentle awareness of your body from head to toe",
       duration: "10 min",
       category: "Basics",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "3",
@@ -22,7 +24,8 @@ export const meditationData = {
       description: "Quick mindfulness practice for busy days",
       duration: "5 min",
       category: "Basics",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     }
   ],
   sleep: [
@@ -32,7 +35,8 @@ export const meditationData = {
       description: "Gentle meditation to prepare for restful sleep",
       duration: "15 min",
       category: "Sleep",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "5",
@@ -40,7 +44,8 @@ export const meditationData = {
       description: "Calming bedtime stories for adults",
       duration: "25 min",
       category: "Sleep",
-      isLocked: true
+      isLocked: true,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "6",
@@ -48,7 +53,8 @@ export const meditationData = {
       description: "Progressive relaxation for deeper sleep",
       duration: "20 min",
       category: "Sleep",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     }
   ],
   focus: [
@@ -58,7 +64,8 @@ export const meditationData = {
       description: "Sharpen your focus and concentration",
       duration: "12 min",
       category: "Focus",
-      isLocked: false
+      isLocked: false,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "8",
@@ -66,7 +73,8 @@ export const meditationData = {
       description: "Quick reset between tasks",
       duration: "8 min",
       category: "Focus",
-      isLocked: true
+      isLocked: true,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     },
     {
       id: "9",
@@ -74,7 +82,8 @@ export const meditationData = {
       description: "Extended meditation for sustained attention",
       duration: "30 min",
       category: "Focus",
-      isLocked: true
+      isLocked: true,
+      audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
     }
   ]
 };
