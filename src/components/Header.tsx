@@ -1,0 +1,36 @@
+import { Button } from "@/components/ui/button";
+import { User } from "lucide-react";
+
+const Header = () => {
+  return (
+    <header className="bg-background border-b border-border sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-8">
+          <h1 className="text-2xl font-bold text-primary">Mindful</h1>
+          <nav className="hidden md:flex space-x-6">
+            <a href="#meditate" className="text-foreground hover:text-primary transition-colors">
+              Meditate
+            </a>
+            <a href="#sleep" className="text-foreground hover:text-primary transition-colors">
+              Sleep
+            </a>
+            <a href="#focus" className="text-foreground hover:text-primary transition-colors">
+              Focus
+            </a>
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button variant="outline" size="sm">
+            <User className="h-4 w-4 mr-2" />
+            Sign In
+          </Button>
+          <Button size="sm">
+            Get Started
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
