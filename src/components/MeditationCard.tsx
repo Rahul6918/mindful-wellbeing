@@ -1,8 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 interface MeditationCardProps {
+  id: string;
   title: string;
   description: string;
   duration: string;
@@ -12,6 +14,7 @@ interface MeditationCardProps {
 }
 
 const MeditationCard = ({ 
+  id,
   title, 
   description, 
   duration, 
@@ -41,14 +44,15 @@ const MeditationCard = ({
             <div className="w-8 h-8 bg-primary rounded-full"></div>
           </div>
         </div>
-        <Button 
-          className="w-full" 
-          variant={isLocked ? "outline" : "default"}
-          disabled={isLocked}
-          onClick={() => !isLocked && (window.location.href = `/player/meditation-1`)}
-        >
-          {isLocked ? "Unlock with Premium" : "Start Session"}
-        </Button>
+        {isLocked ? (
+          <Button className="w-full" variant="outline" disabled>
+            Unlock with Premium
+          </Button>
+        ) : (
+          <Button asChild className="w-full">
+            <Link to={`/player/${id}`}>Start Session</Link>
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

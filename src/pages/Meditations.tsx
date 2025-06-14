@@ -76,6 +76,7 @@ const Meditations = () => {
           {filteredMeditations.map((meditation) => (
             <MeditationCard
               key={meditation.id}
+              id={meditation.id}
               title={meditation.title}
               description={meditation.description}
               duration={meditation.duration}

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -14,11 +15,11 @@ const HeroSection = () => {
             designed to help you stress less and live more mindfully.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Start Your Journey
+            <Button asChild size="lg" className="text-lg px-8 py-6">
+              <Link to="/meditations">Start Your Journey</Link>
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-              Try Free for 7 Days
+            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
+              <Link to="/discover">Try Free for 7 Days</Link>
             </Button>
           </div>
         </div>

@@ -25,6 +25,7 @@ const CategorySection = ({ title, description, meditations }: CategorySectionPro
           {meditations.map((meditation) => (
             <MeditationCard
               key={meditation.id}
+              id={meditation.id}
               title={meditation.title}
               description={meditation.description}
               duration={meditation.duration}

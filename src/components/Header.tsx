@@ -1,24 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <a href="/" className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
+          <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             Mindful
-          </a>
+          </Link>
           <nav className="hidden md:flex space-x-6">
-            <a href="/discover" className="text-foreground hover:text-primary transition-colors">
+            <Link to="/discover" className="text-foreground hover:text-primary transition-colors">
               Discover
-            </a>
-            <a href="/meditations" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/meditations" className="text-foreground hover:text-primary transition-colors">
               Meditations
-            </a>
-            <a href="/profile" className="text-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/profile" className="text-foreground hover:text-primary transition-colors">
               Profile
-            </a>
+            </Link>
           </nav>
         </div>
         <div className="flex items-center space-x-4">
