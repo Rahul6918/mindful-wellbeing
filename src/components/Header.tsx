@@ -8,14 +8,14 @@ const Header = () => {
         <div className="flex items-center space-x-8">
           <h1 className="text-2xl font-bold text-primary">Mindful</h1>
           <nav className="hidden md:flex space-x-6">
-            <a href="#meditate" className="text-foreground hover:text-primary transition-colors">
-              Meditate
+            <a href="/discover" className="text-foreground hover:text-primary transition-colors">
+              Discover
             </a>
-            <a href="#sleep" className="text-foreground hover:text-primary transition-colors">
-              Sleep
+            <a href="/meditations" className="text-foreground hover:text-primary transition-colors">
+              Meditations
             </a>
-            <a href="#focus" className="text-foreground hover:text-primary transition-colors">
-              Focus
+            <a href="/profile" className="text-foreground hover:text-primary transition-colors">
+              Profile
             </a>
           </nav>
         </div>

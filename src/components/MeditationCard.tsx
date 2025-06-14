@@ -45,6 +45,7 @@ const MeditationCard = ({
           className="w-full" 
           variant={isLocked ? "outline" : "default"}
           disabled={isLocked}
+          onClick={() => !isLocked && (window.location.href = `/player/meditation-1`)}
         >
           {isLocked ? "Unlock with Premium" : "Start Session"}
         </Button>

@@ -5,21 +5,24 @@ export const meditationData = {
       title: "Breathing Space",
       description: "A simple introduction to mindful breathing",
       duration: "3 min",
-      category: "Basics"
+      category: "Basics",
+      isLocked: false
     },
     {
       id: "2", 
       title: "Body Scan",
       description: "Gentle awareness of your body from head to toe",
       duration: "10 min",
-      category: "Basics"
+      category: "Basics",
+      isLocked: false
     },
     {
       id: "3",
       title: "Mindful Moments",
       description: "Quick mindfulness practice for busy days",
       duration: "5 min",
-      category: "Basics"
+      category: "Basics",
+      isLocked: false
     }
   ],
   sleep: [
@@ -28,7 +31,8 @@ export const meditationData = {
       title: "Wind Down",
       description: "Gentle meditation to prepare for restful sleep",
       duration: "15 min",
-      category: "Sleep"
+      category: "Sleep",
+      isLocked: false
     },
     {
       id: "5",
@@ -43,7 +47,8 @@ export const meditationData = {
       title: "Deep Rest",
       description: "Progressive relaxation for deeper sleep",
       duration: "20 min",
-      category: "Sleep"
+      category: "Sleep",
+      isLocked: false
     }
   ],
   focus: [
@@ -52,7 +57,8 @@ export const meditationData = {
       title: "Mental Clarity",
       description: "Sharpen your focus and concentration",
       duration: "12 min",
-      category: "Focus"
+      category: "Focus",
+      isLocked: false
     },
     {
       id: "8",
