@@ -34,7 +34,7 @@ const Pricing = () => {
         "Sleep stories (limited)",
         "Progress tracking"
       ],
-      buttonText: "Current Plan",
+      buttonText: session ? "Current Plan" : "Get Started Free",
       popular: false,
       variant: "outline" as const,
       priceId: null
@@ -53,7 +53,7 @@ const Pricing = () => {
         "Daily reminders",
         "Premium sleep stories"
       ],
-      buttonText: "Start Premium",
+      buttonText: session ? "Start Premium" : "Sign Up for Premium",
       popular: true,
       variant: "default" as const,
       priceId: stripePrices.monthly
@@ -71,7 +71,7 @@ const Pricing = () => {
         "Early access to new features",
         "Bonus meditation courses"
       ],
-      buttonText: "Get Lifetime Access",
+      buttonText: session ? "Get Lifetime Access" : "Sign Up for Lifetime",
       popular: false,
       variant: "secondary" as const,
       priceId: stripePrices.forever
@@ -93,10 +93,7 @@ const Pricing = () => {
       const { data: { session } } = await supabase.auth.getSession();
       setSession(session);
       
-      if (!session) {
-        navigate("/auth");
-        return;
-      }
+      // Don't redirect if not logged in - just show pricing page
     } catch (error: any) {
       toast({
         title: "Authentication Error",
@@ -131,6 +128,12 @@ const Pricing = () => {
   };
 
   const handleSubscribe = async (priceId: string) => {
+    // If user is not logged in, redirect to auth page
+    if (!session) {
+      navigate("/auth");
+      return;
+    }
+    
     if (!priceId) return;
     
     try {
@@ -199,36 +202,37 @@ const Pricing = () => {
               : "Start free and upgrade anytime. Cancel whenever you want."
             }
           </p>
-          
-          {/* Subscription Status & Controls */}
-          <div className="flex items-center justify-center gap-4 mb-8">
-            {isSubscribed && (
-              <Badge variant="secondary" className="px-3 py-1">
-                Active: {currentTier} Plan
-              </Badge>
-            )}
-            <Button 
-              onClick={checkSubscription}
-              disabled={refreshing}
-              variant="outline" 
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
-              Refresh Status
-            </Button>
-            {isSubscribed && (
+          {/* Subscription Status & Controls - only show for logged in users */}
+          {session && (
+            <div className="flex items-center justify-center gap-4 mb-8">
+              {isSubscribed && (
+                <Badge variant="secondary" className="px-3 py-1">
+                  Active: {currentTier} Plan
+                </Badge>
+              )}
               <Button 
-                onClick={handleManageSubscription}
+                onClick={checkSubscription}
+                disabled={refreshing}
                 variant="outline" 
                 size="sm"
                 className="flex items-center gap-2"
               >
-                <Settings className="h-4 w-4" />
-                Manage Subscription
+                <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+                Refresh Status
               </Button>
-            )}
-          </div>
+              {isSubscribed && (
+                <Button 
+                  onClick={handleManageSubscription}
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
+                  <Settings className="h-4 w-4" />
+                  Manage Subscription
+                </Button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Pricing Cards */}
@@ -289,7 +293,15 @@ const Pricing = () => {
                     variant={isCurrentPlan ? "outline" : plan.variant}
                     size="lg"
                     disabled={isCurrentPlan}
-                    onClick={() => plan.priceId && handleSubscribe(plan.priceId)}
+                    onClick={() => {
+                      if (!session) {
+                        navigate("/auth");
+                        return;
+                      }
+                      if (plan.priceId) {
+                        handleSubscribe(plan.priceId);
+                      }
+                    }}
                   >
                     {isCurrentPlan ? "Current Plan" : plan.buttonText}
                   </Button>
