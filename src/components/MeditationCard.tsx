@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface MeditationCardProps {
   id: string;
@@ -22,6 +23,8 @@ const MeditationCard = ({
   image,
   isLocked = false 
 }: MeditationCardProps) => {
+  const { isSubscribed } = useSubscription();
+  const canAccess = !isLocked || isSubscribed;
   return (
     <Card className="cursor-pointer group h-full flex flex-col">
       <CardHeader className="pb-3">
@@ -44,9 +47,9 @@ const MeditationCard = ({
             <div className="w-8 h-8 bg-primary rounded-full"></div>
           </div>
         </div>
-        {isLocked ? (
-          <Button className="w-full" variant="outline" disabled>
-            Unlock with Premium
+        {!canAccess ? (
+          <Button asChild className="w-full" variant="outline">
+            <Link to="/pricing">Unlock with Premium</Link>
           </Button>
         ) : (
           <Button asChild className="w-full">
