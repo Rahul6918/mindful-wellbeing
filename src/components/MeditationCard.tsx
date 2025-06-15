@@ -34,7 +34,7 @@ const MeditationCard = ({
         <CardTitle className="text-lg">
           {title}
         </CardTitle>
-        <CardDescription className="text-sm">
+        <CardDescription className="text-sm line-clamp-1">
           {description}
         </CardDescription>
       </CardHeader>
