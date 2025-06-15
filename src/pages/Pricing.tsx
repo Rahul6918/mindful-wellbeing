@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star } from "lucide-react";
 
 const Pricing = () => {
+  const [isAnnual, setIsAnnual] = useState(true);
   const plans = [
     {
       name: "Free",
@@ -22,8 +24,11 @@ const Pricing = () => {
     },
     {
       name: "Premium",
-      price: "$9.99",
-      period: "per month",
+      price: isAnnual ? "$1" : "$2",
+      originalPrice: isAnnual ? "$12" : "$24",
+      period: isAnnual ? "per month (billed annually)" : "per month",
+      yearlyPrice: isAnnual ? "$12/year" : null,
+      savings: isAnnual ? "Save 50%" : null,
       description: "Unlock your full potential",
       features: [
         "Unlimited guided meditations",
@@ -40,8 +45,10 @@ const Pricing = () => {
     },
     {
       name: "Lifetime",
-      price: "$199",
-      period: "one-time",
+      price: "$99",
+      originalPrice: "$199",
+      period: "one-time payment",
+      savings: "50% OFF",
       description: "Mindfulness for life",
       features: [
         "Everything in Premium",
@@ -65,9 +72,36 @@ const Pricing = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Choose Your Mindfulness Plan
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Start free and upgrade anytime. Cancel whenever you want.
           </p>
+          
+          {/* Annual/Monthly Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Monthly
+            </span>
+            <button
+              onClick={() => setIsAnnual(!isAnnual)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                isAnnual ? 'bg-primary' : 'bg-muted'
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-background transition-transform ${
+                  isAnnual ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+            <span className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Annual
+            </span>
+            {isAnnual && (
+              <Badge variant="secondary" className="ml-2">
+                Save 50%
+              </Badge>
+            )}
+          </div>
         </div>
 
         {/* Pricing Cards */}
@@ -89,8 +123,27 @@ const Pricing = () => {
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-primary">{plan.price}</span>
-                  <span className="text-muted-foreground ml-2">/{plan.period}</span>
+                  <div className="flex items-center justify-center gap-2">
+                    {plan.originalPrice && (
+                      <span className="text-lg text-muted-foreground line-through">
+                        {plan.originalPrice}
+                      </span>
+                    )}
+                    <span className="text-4xl font-bold text-primary">{plan.price}</span>
+                    {plan.savings && (
+                      <Badge variant="secondary" className="text-xs">
+                        {plan.savings}
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="mt-2">
+                    <span className="text-muted-foreground">/{plan.period}</span>
+                    {plan.yearlyPrice && (
+                      <div className="text-sm text-muted-foreground mt-1">
+                        {plan.yearlyPrice}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <p className="text-muted-foreground mt-2">{plan.description}</p>
               </CardHeader>
