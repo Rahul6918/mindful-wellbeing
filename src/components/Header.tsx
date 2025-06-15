@@ -7,30 +7,30 @@ const Header = () => {
     <header className="bg-background border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 gentle-transition">
+          <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80">
             Mindful
           </Link>
           <nav className="hidden md:flex space-x-6">
-            <Link to="/discover" className="text-foreground hover:text-primary gentle-transition hover-lift">
+            <Link to="/discover" className="text-foreground hover:text-primary">
               Discover
             </Link>
-            <Link to="/meditations" className="text-foreground hover:text-primary gentle-transition hover-lift">
+            <Link to="/meditations" className="text-foreground hover:text-primary">
               Meditations
             </Link>
-            <Link to="/pricing" className="text-foreground hover:text-primary gentle-transition hover-lift">
+            <Link to="/pricing" className="text-foreground hover:text-primary">
               Pricing
             </Link>
-            <Link to="/profile" className="text-foreground hover:text-primary gentle-transition hover-lift">
+            <Link to="/profile" className="text-foreground hover:text-primary">
               Profile
             </Link>
           </nav>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="sm" className="btn-interactive hover-breathe">
-            <User className="h-4 w-4 mr-2 float-element" />
+          <Button variant="outline" size="sm">
+            <User className="h-4 w-4 mr-2" />
             Sign In
           </Button>
-          <Button size="sm" className="btn-interactive hover-glow">
+          <Button size="sm">
             Get Started
           </Button>
         </div>
