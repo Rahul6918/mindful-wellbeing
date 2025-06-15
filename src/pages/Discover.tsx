@@ -157,18 +157,6 @@ const Discover = () => {
           {/* Search and Filter Section */}
           <div className="mb-8">
             <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-              {/* Search Bar */}
-              <div className="relative w-full md:max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  type="text"
-                  placeholder="Search meditations..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              
               {/* Category Pills */}
               <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full md:w-auto">
                 <TabsList className="grid grid-cols-4 w-full md:w-auto">
@@ -198,6 +186,18 @@ const Discover = () => {
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
+              
+              {/* Search Bar */}
+              <div className="relative w-full md:max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input
+                  type="text"
+                  placeholder="Search meditations..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
             </div>
           </div>
           
