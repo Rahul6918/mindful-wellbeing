@@ -16,7 +16,7 @@ const HeroSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center delayed-entrance">
             <Button asChild size="lg" className="text-lg px-8 py-6 btn-interactive hover-glow">
-              <Link to="/meditations">Start Your Journey</Link>
+              <Link to="/auth">Start Your Journey</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 btn-interactive hover-lift">
               <Link to="/discover">Try Free for 7 Days</Link>

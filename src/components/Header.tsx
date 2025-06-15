@@ -45,12 +45,16 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           {/* Desktop Auth Buttons */}
           <div className="hidden sm:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              <User className="h-4 w-4 mr-2" />
-              Sign In
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/auth">
+                <User className="h-4 w-4 mr-2" />
+                Sign In
+              </Link>
             </Button>
-            <Button size="sm">
-              Get Started
+            <Button size="sm" asChild>
+              <Link to="/auth">
+                Get Started
+              </Link>
             </Button>
           </div>
 
@@ -75,12 +79,16 @@ const Header = () => {
                     </Link>
                   ))}
                   <div className="pt-4 border-t space-y-3">
-                    <Button variant="outline" className="w-full">
-                      <User className="h-4 w-4 mr-2" />
-                      Sign In
+                    <Button variant="outline" className="w-full" asChild>
+                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                        <User className="h-4 w-4 mr-2" />
+                        Sign In
+                      </Link>
                     </Button>
-                    <Button className="w-full">
-                      Get Started
+                    <Button className="w-full" asChild>
+                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                        Get Started
+                      </Link>
                     </Button>
                   </div>
                 </div>
