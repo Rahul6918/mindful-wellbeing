@@ -8,7 +8,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight soft-entrance">
             Find your calm in the
-            <span className="text-primary hover-glow"> everyday chaos</span>
+            <span className="text-primary"> everyday chaos</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed delayed-entrance">
             Discover thousands of guided meditations, sleep stories, and mindfulness exercises 

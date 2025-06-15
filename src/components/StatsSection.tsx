@@ -12,7 +12,7 @@ const StatsSection = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, index) => (
             <div key={index} className="space-y-2 soft-entrance hover-lift gentle-transition" style={{animationDelay: `${index * 0.1}s`}}>
-              <div className="text-3xl md:text-4xl font-bold text-primary hover-glow float-element">
+              <div className="text-3xl md:text-4xl font-bold text-primary float-element">
                 {stat.number}
               </div>
               <div className="text-muted-foreground delayed-entrance">

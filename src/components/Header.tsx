@@ -7,7 +7,7 @@ const Header = () => {
     <header className="bg-background border-b border-border sticky top-0 z-50 breathe-element">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 gentle-transition hover-glow">
+          <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 gentle-transition">
             Mindful
           </Link>
           <nav className="hidden md:flex space-x-6">

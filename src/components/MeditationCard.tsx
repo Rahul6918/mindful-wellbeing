@@ -26,7 +26,7 @@ const MeditationCard = ({
     <Card className="card-breathe hover:shadow-lg gentle-transition cursor-pointer group hover-lift">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between soft-entrance">
-          <Badge variant="secondary" className="text-xs hover-breathe">
+          <Badge variant="secondary" className="text-xs">
             {category}
           </Badge>
           <span className="text-sm text-muted-foreground delayed-entrance">{duration}</span>

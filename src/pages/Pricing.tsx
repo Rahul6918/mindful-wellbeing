@@ -69,7 +69,7 @@ const Pricing = () => {
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-foreground mb-4 soft-entrance hover-glow">
+          <h1 className="text-4xl font-bold text-foreground mb-4 soft-entrance">
             Choose Your Mindfulness Plan
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 delayed-entrance">
@@ -130,7 +130,7 @@ const Pricing = () => {
                         {plan.originalPrice}
                       </span>
                     )}
-                    <span className="text-4xl font-bold text-primary hover-glow">{plan.price}</span>
+                    <span className="text-4xl font-bold text-primary">{plan.price}</span>
                     {plan.savings && (
                       <Badge variant="secondary" className="text-xs float-element">
                         {plan.savings}
@@ -173,32 +173,32 @@ const Pricing = () => {
 
         {/* FAQ Section */}
         <div className="mt-20 max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 soft-entrance hover-glow">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 soft-entrance">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
             <div className="bg-card rounded-lg p-6 card-breathe hover-lift gentle-transition soft-entrance" style={{animationDelay: '0.1s'}}>
-              <h3 className="font-semibold text-lg mb-2 hover-glow">Can I cancel anytime?</h3>
+              <h3 className="font-semibold text-lg mb-2">Can I cancel anytime?</h3>
               <p className="text-muted-foreground">
                 Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period.
               </p>
             </div>
 
             <div className="bg-card rounded-lg p-6 card-breathe hover-lift gentle-transition soft-entrance" style={{animationDelay: '0.2s'}}>
-              <h3 className="font-semibold text-lg mb-2 hover-glow">Is there a free trial?</h3>
+              <h3 className="font-semibold text-lg mb-2">Is there a free trial?</h3>
               <p className="text-muted-foreground">
                 Yes! Premium comes with a 7-day free trial. No credit card required to start.
               </p>
             </div>
 
             <div className="bg-card rounded-lg p-6 card-breathe hover-lift gentle-transition soft-entrance" style={{animationDelay: '0.3s'}}>
-              <h3 className="font-semibold text-lg mb-2 hover-glow">What's included in the free plan?</h3>
+              <h3 className="font-semibold text-lg mb-2">What's included in the free plan?</h3>
               <p className="text-muted-foreground">
                 The free plan includes 3 guided meditations, basic breathing exercises, and limited sleep stories to get you started.
               </p>
             </div>
 
             <div className="bg-card rounded-lg p-6 card-breathe hover-lift gentle-transition soft-entrance" style={{animationDelay: '0.4s'}}>
-              <h3 className="font-semibold text-lg mb-2 hover-glow">Can I download meditations for offline use?</h3>
+              <h3 className="font-semibold text-lg mb-2">Can I download meditations for offline use?</h3>
               <p className="text-muted-foreground">
                 Yes, Premium and Lifetime subscribers can download meditations to listen offline.
               </p>

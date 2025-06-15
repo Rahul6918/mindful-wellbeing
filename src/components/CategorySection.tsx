@@ -18,7 +18,7 @@ const CategorySection = ({ title, description, meditations }: CategorySectionPro
     <section className="py-12 breathe-element">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-4 soft-entrance hover-glow">{title}</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4 soft-entrance">{title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto delayed-entrance">{description}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
