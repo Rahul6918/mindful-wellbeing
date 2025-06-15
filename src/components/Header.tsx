@@ -1,26 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { User, Menu, LogOut } from "lucide-react";
+import { User, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useAuth } from "@/contexts/AuthContext";
 import {
   Drawer,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const isMobile = useIsMobile();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { user, signOut } = useAuth();
 
   const navigationLinks = [
     { to: "/discover", label: "Discover" },
@@ -52,40 +43,17 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Desktop Auth Section */}
+          {/* Desktop Auth Buttons */}
           <div className="hidden sm:flex items-center space-x-4">
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    <User className="h-4 w-4 mr-2" />
-                    Account
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link to="/profile">Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={signOut}>
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/auth">
-                    <User className="h-4 w-4 mr-2" />
-                    Sign In
-                  </Link>
-                </Button>
-                <Button size="sm" asChild>
-                  <Link to="/auth">Get Started</Link>
-                </Button>
-              </>
-            )}
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/auth">
+                <User className="h-4 w-4 mr-2" />
+                Sign In
+              </Link>
+            </Button>
+            <Button size="sm" asChild>
+              <Link to="/auth">Get Started</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -109,33 +77,17 @@ const Header = () => {
                     </Link>
                   ))}
                   <div className="pt-4 border-t space-y-3">
-                    {user ? (
-                      <Button 
-                        variant="outline" 
-                        className="w-full" 
-                        onClick={() => {
-                          setIsDrawerOpen(false);
-                          signOut();
-                        }}
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
-                      </Button>
-                    ) : (
-                      <>
-                        <Button variant="outline" className="w-full" asChild>
-                          <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
-                            <User className="h-4 w-4 mr-2" />
-                            Sign In
-                          </Link>
-                        </Button>
-                        <Button className="w-full" asChild>
-                          <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
-                            Get Started
-                          </Link>
-                        </Button>
-                      </>
-                    )}
+                    <Button variant="outline" className="w-full" asChild>
+                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                        <User className="h-4 w-4 mr-2" />
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button className="w-full" asChild>
+                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                        Get Started
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </DrawerContent>
