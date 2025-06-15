@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { meditationData } from "@/data/meditations";
 import { useAudioPlayer } from "@/hooks/useAudioPlayer";
+import Header from "@/components/Header";
 
 const Player = () => {
   const { id } = useParams();
@@ -67,7 +68,8 @@ const Player = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/10">
-      {/* Header */}
+      <Header />
+      {/* Player Header */}
       <div className="p-4 flex items-center justify-between">
         <Button variant="ghost" onClick={() => navigate(-1)}>
           <ArrowLeft className="h-4 w-4 mr-2" />
