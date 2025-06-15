@@ -245,23 +245,27 @@ const Pricing = () => {
         {/* Billing Toggle */}
         <div className="flex items-center justify-center mb-12">
           <div className="flex items-center bg-muted rounded-lg p-1">
-            <Button
-              variant={!isAnnual ? "default" : "ghost"}
-              size="sm"
+            <button
               onClick={() => setIsAnnual(false)}
-              className="rounded-md"
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                !isAnnual 
+                  ? "bg-background text-foreground shadow-sm" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               Monthly
-            </Button>
-            <Button
-              variant={isAnnual ? "default" : "ghost"}
-              size="sm"
+            </button>
+            <button
               onClick={() => setIsAnnual(true)}
-              className="rounded-md"
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
+                isAnnual 
+                  ? "bg-background text-foreground shadow-sm" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               Annual
-              <Badge variant="secondary" className="ml-2 text-xs">Save 50%</Badge>
-            </Button>
+              <Badge variant="secondary" className="text-xs">Save 50%</Badge>
+            </button>
           </div>
         </div>
 
