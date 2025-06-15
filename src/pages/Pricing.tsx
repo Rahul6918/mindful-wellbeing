@@ -249,7 +249,7 @@ const Pricing = () => {
               onClick={() => setIsAnnual(false)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 !isAnnual 
-                  ? "bg-background text-foreground shadow-sm" 
+                  ? "bg-green-500 text-white shadow-sm" 
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -259,7 +259,7 @@ const Pricing = () => {
               onClick={() => setIsAnnual(true)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
                 isAnnual 
-                  ? "bg-background text-foreground shadow-sm" 
+                  ? "bg-green-500 text-white shadow-sm" 
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
