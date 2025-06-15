@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Calendar, Clock, Award, Settings, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const stats = [
@@ -50,9 +51,11 @@ const Profile = () => {
             </div>
           </div>
           
-          <Button variant="outline">
-            <Settings className="h-4 w-4 mr-2" />
-            Edit Profile
+          <Button variant="outline" asChild>
+            <Link to="/profile/edit">
+              <Settings className="h-4 w-4 mr-2" />
+              Edit Profile
+            </Link>
           </Button>
         </div>
 
