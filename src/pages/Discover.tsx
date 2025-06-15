@@ -155,28 +155,50 @@ const Discover = () => {
           </div>
           
           {/* Search and Filter Section */}
-          <div className="mb-8 space-y-6">
-            {/* Search Bar */}
-            <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Search meditations..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
+          <div className="mb-8">
+            <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+              {/* Search Bar */}
+              <div className="relative w-full md:max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input
+                  type="text"
+                  placeholder="Search meditations..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              
+              {/* Category Pills */}
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full md:w-auto">
+                <TabsList className="grid grid-cols-4 w-full md:w-auto">
+                  <TabsTrigger 
+                    value="all" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    All
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="basics" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Basics
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="sleep" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Sleep
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="focus" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Focus
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
-            
-            {/* Category Pills */}
-            <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-4">
-                <TabsTrigger value="all" className="text-sm">All</TabsTrigger>
-                <TabsTrigger value="basics" className="text-sm">Basics</TabsTrigger>
-                <TabsTrigger value="sleep" className="text-sm">Sleep</TabsTrigger>
-                <TabsTrigger value="focus" className="text-sm">Focus</TabsTrigger>
-              </TabsList>
-            </Tabs>
           </div>
           
           {/* Results */}
