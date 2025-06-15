@@ -1,15 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { User, Menu, X } from "lucide-react";
+import { User, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
@@ -67,19 +63,6 @@ const Header = () => {
                 </Button>
               </DrawerTrigger>
               <DrawerContent>
-                <DrawerHeader>
-                  <div className="flex items-center justify-between">
-                    <DrawerTitle>Navigation</DrawerTitle>
-                    <DrawerClose asChild>
-                      <Button variant="ghost" size="sm">
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </DrawerClose>
-                  </div>
-                  <DrawerDescription>
-                    Navigate to different sections of the app
-                  </DrawerDescription>
-                </DrawerHeader>
                 <div className="p-4 space-y-4">
                   {navigationLinks.map((link) => (
                     <Link
