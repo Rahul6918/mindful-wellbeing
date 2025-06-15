@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="bg-gradient-to-br from-background via-primary/5 to-secondary/10 py-20 breathe-element">
+    <section className="bg-gradient-to-br from-background via-primary/5 to-secondary/10 py-20">
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight soft-entrance">
@@ -30,14 +30,14 @@ const HeroSection = () => {
             <div className="w-80 h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center hover-glow">
               <div className="w-60 h-60 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full flex items-center justify-center">
                 <div className="w-40 h-40 bg-primary/20 rounded-full flex items-center justify-center">
-                  <div className="w-20 h-20 bg-primary rounded-full"></div>
+                  <div className="w-20 h-20 bg-primary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
                 </div>
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full"></div>
-            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full"></div>
-            <div className="absolute -top-8 -left-4 w-4 h-4 bg-primary/60 rounded-full"></div>
-            <div className="absolute -bottom-4 -right-8 w-5 h-5 bg-secondary/60 rounded-full"></div>
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
+            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full animate-[breathe_4s_ease-in-out_infinite]"></div>
+            <div className="absolute -top-8 -left-4 w-4 h-4 bg-primary/60 rounded-full animate-breathe-slow"></div>
+            <div className="absolute -bottom-4 -right-8 w-5 h-5 bg-secondary/60 rounded-full animate-breathe-slow"></div>
           </div>
         </div>
       </div>
