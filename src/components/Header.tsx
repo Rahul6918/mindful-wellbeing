@@ -1,23 +1,68 @@
 import { Button } from "@/components/ui/button";
-import { User, Menu } from "lucide-react";
+import { User, Menu, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { supabase } from "@/integrations/supabase/client";
+import { Session } from "@supabase/supabase-js";
+import { useToast } from "@/hooks/use-toast";
 import {
   Drawer,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const isMobile = useIsMobile();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      toast({
+        title: "Signed out successfully",
+        description: "You have been signed out of your account.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   const navigationLinks = [
     { to: "/discover", label: "Discover" },
     { to: "/meditations", label: "Meditations" },
     { to: "/pricing", label: "Pricing" },
-    { to: "/profile", label: "Profile" },
+    ...(session ? [{ to: "/profile", label: "Profile" }] : []),
   ];
 
   return (
@@ -43,19 +88,44 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Auth/Profile */}
           <div className="hidden sm:flex items-center space-x-4">
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/auth">
-                <User className="h-4 w-4 mr-2" />
-                Sign In
-              </Link>
-            </Button>
-            <Button size="sm" asChild>
-              <Link to="/auth">
-                Get Started
-              </Link>
-            </Button>
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Profile
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      My Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2">
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/auth">
+                    <User className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Link>
+                </Button>
+                <Button size="sm" asChild>
+                  <Link to="/auth">
+                    Get Started
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu */}
@@ -79,17 +149,26 @@ const Header = () => {
                     </Link>
                   ))}
                   <div className="pt-4 border-t space-y-3">
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
-                        <User className="h-4 w-4 mr-2" />
-                        Sign In
-                      </Link>
-                    </Button>
-                    <Button className="w-full" asChild>
-                      <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
-                        Get Started
-                      </Link>
-                    </Button>
+                    {session ? (
+                      <Button onClick={handleSignOut} className="w-full flex items-center gap-2">
+                        <LogOut className="h-4 w-4" />
+                        Sign Out
+                      </Button>
+                    ) : (
+                      <>
+                        <Button variant="outline" className="w-full" asChild>
+                          <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                            <User className="h-4 w-4 mr-2" />
+                            Sign In
+                          </Link>
+                        </Button>
+                        <Button className="w-full" asChild>
+                          <Link to="/auth" onClick={() => setIsDrawerOpen(false)}>
+                            Get Started
+                          </Link>
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </DrawerContent>
