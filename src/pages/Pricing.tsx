@@ -9,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
 const Pricing = () => {
-  const [isAnnual, setIsAnnual] = useState(true);
   const [session, setSession] = useState<any>(null);
   const [subscription, setSubscription] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -19,8 +18,8 @@ const Pricing = () => {
 
   // Stripe Price IDs - replace with your actual Stripe price IDs
   const stripePrices = {
-    monthly: "price_1OxxxxxxxxxxxxMONTHLY", // Replace with actual monthly price ID
-    annual: "price_1OxxxxxxxxxxxxANNUAL",   // Replace with actual annual price ID
+    monthly: "price_1OxxxxxxxxxxxxMONTHLY", // Replace with actual $1 monthly price ID
+    forever: "price_1OxxxxxxxxxxxxFOREVER",  // Replace with actual $99 one-time price ID
   };
 
   const plans = [
@@ -31,7 +30,7 @@ const Pricing = () => {
       description: "Start your mindfulness journey",
       features: [
         "3 guided meditations",
-        "Basic breathing exercises",
+        "Basic breathing exercises", 
         "Sleep stories (limited)",
         "Progress tracking"
       ],
@@ -42,11 +41,8 @@ const Pricing = () => {
     },
     {
       name: "Premium",
-      price: isAnnual ? "$8" : "$10",
-      originalPrice: isAnnual ? "$12" : "$15",
-      period: isAnnual ? "per month (billed annually)" : "per month",
-      yearlyPrice: isAnnual ? "$96/year" : null,
-      savings: isAnnual ? "Save 20%" : null,
+      price: "$1",
+      period: "per month",
       description: "Unlock your full potential",
       features: [
         "Unlimited guided meditations",
@@ -57,10 +53,28 @@ const Pricing = () => {
         "Daily reminders",
         "Premium sleep stories"
       ],
-      buttonText: "Start Free Trial",
+      buttonText: "Start Premium",
       popular: true,
       variant: "default" as const,
-      priceId: isAnnual ? stripePrices.annual : stripePrices.monthly
+      priceId: stripePrices.monthly
+    },
+    {
+      name: "Forever",
+      price: "$99",
+      period: "one-time payment",
+      description: "Mindfulness for life",
+      features: [
+        "Everything in Premium",
+        "Lifetime access",
+        "Future content updates",
+        "Priority support",
+        "Early access to new features",
+        "Bonus meditation courses"
+      ],
+      buttonText: "Get Lifetime Access",
+      popular: false,
+      variant: "secondary" as const,
+      priceId: stripePrices.forever
     }
   ];
 
@@ -215,39 +229,10 @@ const Pricing = () => {
               </Button>
             )}
           </div>
-          
-          {/* Annual/Monthly Toggle - only show if not subscribed */}
-          {!isSubscribed && (
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className={`text-sm font-medium transition-colors duration-200 ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                Monthly
-              </span>
-              <button
-                onClick={() => setIsAnnual(!isAnnual)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-300 hover:scale-105 ${
-                  isAnnual ? 'bg-primary' : 'bg-muted'
-                }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-background transition-transform duration-200 ${
-                    isAnnual ? 'translate-x-6' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <span className={`text-sm font-medium transition-colors duration-200 ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                Annual
-              </span>
-              {isAnnual && (
-                <Badge variant="secondary" className="ml-2">
-                  Save 20%
-                </Badge>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
             const isCurrentPlan = (plan.name === "Free" && !isSubscribed) || 
                                  (plan.name === "Premium" && isSubscribed);
@@ -280,25 +265,10 @@ const Pricing = () => {
                   <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                   <div className="mt-4">
                     <div className="flex items-center justify-center gap-2">
-                      {plan.originalPrice && (
-                        <span className="text-lg text-muted-foreground line-through">
-                          {plan.originalPrice}
-                        </span>
-                      )}
                       <span className="text-4xl font-bold text-primary">{plan.price}</span>
-                      {plan.savings && (
-                        <Badge variant="secondary" className="text-xs">
-                          {plan.savings}
-                        </Badge>
-                      )}
                     </div>
                     <div className="mt-2">
                       <span className="text-muted-foreground">/{plan.period}</span>
-                      {plan.yearlyPrice && (
-                        <div className="text-sm text-muted-foreground mt-1">
-                          {plan.yearlyPrice}
-                        </div>
-                      )}
                     </div>
                   </div>
                   <p className="text-muted-foreground mt-2">{plan.description}</p>
