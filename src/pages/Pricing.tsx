@@ -238,8 +238,8 @@ const Pricing = () => {
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
-            const isCurrentPlan = (plan.name === "Free" && !isSubscribed) || 
-                                 (plan.name === "Premium" && isSubscribed);
+            const isCurrentPlan = session && ((plan.name === "Free" && !isSubscribed) || 
+                                 (plan.name === "Premium" && isSubscribed));
             
             return (
               <Card 
