@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import CategorySection from "@/components/CategorySection";
+import Footer from "@/components/Footer";
 import { meditationData } from "@/data/meditations";
 
 const Index = () => {
@@ -29,20 +30,7 @@ const Index = () => {
         meditations={meditationData.focus}
       />
       
-      {/* Footer */}
-      <footer className="bg-muted/50 py-12 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Mindful</h2>
-          <p className="text-muted-foreground mb-6">
-            Your journey to better mental health starts here
-          </p>
-          <div className="flex justify-center space-x-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms</a>
-            <a href="#" className="hover:text-primary transition-colors">Support</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
