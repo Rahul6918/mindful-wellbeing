@@ -7,6 +7,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -75,6 +76,9 @@ const Header = () => {
                       </Button>
                     </DrawerClose>
                   </div>
+                  <DrawerDescription>
+                    Navigate to different sections of the app
+                  </DrawerDescription>
                 </DrawerHeader>
                 <div className="p-4 space-y-4">
                   {navigationLinks.map((link) => (
