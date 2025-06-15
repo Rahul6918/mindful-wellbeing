@@ -159,7 +159,7 @@ const Pricing = () => {
                 </ul>
 
                 <Button 
-                  className="w-full transition-all duration-200 hover:scale-105 active:scale-95" 
+                  className="w-full transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-primary hover:text-primary-foreground" 
                   variant={plan.variant}
                   size="lg"
                 >
