@@ -53,15 +53,20 @@ export const useAudioPlayer = ({ src, onEnded }: UseAudioPlayerProps) => {
   }, [volume]);
 
   const play = useCallback(async () => {
+    console.log('Play function called', { audioRef: audioRef.current, isLoading, src });
     if (audioRef.current && !isLoading) {
       try {
+        console.log('Attempting to play audio...');
         await audioRef.current.play();
+        console.log('Audio started playing');
         setIsPlaying(true);
       } catch (error) {
         console.error('Error playing audio:', error);
       }
+    } else {
+      console.log('Cannot play - audio not ready or loading', { hasAudio: !!audioRef.current, isLoading });
     }
-  }, [isLoading]);
+  }, [isLoading, src]);
 
   const pause = useCallback(() => {
     if (audioRef.current) {
@@ -71,6 +76,7 @@ export const useAudioPlayer = ({ src, onEnded }: UseAudioPlayerProps) => {
   }, []);
 
   const togglePlayPause = useCallback(() => {
+    console.log('Toggle play/pause clicked', { isPlaying });
     if (isPlaying) {
       pause();
     } else {
