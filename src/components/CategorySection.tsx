@@ -18,6 +18,10 @@ const CategorySection = ({
 }: CategorySectionProps) => {
   return <section className="py-12">
       <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-2">{title}</h2>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {meditations.map((meditation, index) => <div key={meditation.id}>
