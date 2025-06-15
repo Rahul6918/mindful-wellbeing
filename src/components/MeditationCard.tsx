@@ -39,7 +39,7 @@ const MeditationCard = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 flex flex-col">
-        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center flex-1">
+        <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
             <div className="w-8 h-8 bg-primary rounded-full"></div>
           </div>
