@@ -3,10 +3,30 @@ import CategorySection from "@/components/CategorySection";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, TrendingUp, Calendar, Clock } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Sparkles, TrendingUp, Calendar, Clock, Search } from "lucide-react";
 import { meditationData } from "@/data/meditations";
+import { useState } from "react";
 
 const Discover = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  
+  const allMeditations = [
+    ...meditationData.beginner,
+    ...meditationData.sleep,
+    ...meditationData.focus
+  ];
+  
+  const filteredMeditations = allMeditations.filter(meditation => {
+    const matchesSearch = meditation.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         meditation.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || 
+                           meditation.category.toLowerCase() === selectedCategory.toLowerCase();
+    return matchesSearch && matchesCategory;
+  });
+  
   const featuredContent = [
     {
       title: "7-Day Mindfulness Challenge",
@@ -134,10 +154,36 @@ const Discover = () => {
             <h2 className="text-3xl font-bold text-foreground">Browse by Category</h2>
           </div>
           
+          {/* Search and Filter Section */}
+          <div className="mb-8 space-y-6">
+            {/* Search Bar */}
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="Search meditations..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            
+            {/* Category Pills */}
+            <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-4">
+                <TabsTrigger value="all" className="text-sm">All</TabsTrigger>
+                <TabsTrigger value="basics" className="text-sm">Basics</TabsTrigger>
+                <TabsTrigger value="sleep" className="text-sm">Sleep</TabsTrigger>
+                <TabsTrigger value="focus" className="text-sm">Focus</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          
+          {/* Results */}
           <CategorySection
-            title="Quick Sessions"
-            description="Perfect for busy schedules - find calm in just a few minutes"
-            meditations={meditationData.beginner.slice(0, 3)}
+            title={`${filteredMeditations.length} ${filteredMeditations.length === 1 ? 'Result' : 'Results'}`}
+            description={searchQuery ? `Showing results for "${searchQuery}"` : "Explore all available meditations"}
+            meditations={filteredMeditations}
           />
         </div>
 
