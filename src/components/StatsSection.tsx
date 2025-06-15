@@ -7,15 +7,15 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-16 bg-muted/30 breathe-element">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, index) => (
-            <div key={index} className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold text-primary">
+            <div key={index} className="space-y-2 soft-entrance hover-lift gentle-transition" style={{animationDelay: `${index * 0.1}s`}}>
+              <div className="text-3xl md:text-4xl font-bold text-primary hover-glow float-element">
                 {stat.number}
               </div>
-              <div className="text-muted-foreground">
+              <div className="text-muted-foreground delayed-entrance">
                 {stat.label}
               </div>
             </div>
