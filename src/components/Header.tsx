@@ -64,6 +64,8 @@ const Header = () => {
     { to: "/pricing", label: "Pricing" },
   ];
 
+  console.log('Header component rendering');
+  
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
