@@ -34,10 +34,10 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full"></div>
-            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full"></div>
-            <div className="absolute -top-8 -left-4 w-4 h-4 bg-primary/60 rounded-full"></div>
-            <div className="absolute -bottom-4 -right-8 w-5 h-5 bg-secondary/60 rounded-full"></div>
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full float-element"></div>
+            <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent rounded-full float-element"></div>
+            <div className="absolute -top-8 -left-4 w-4 h-4 bg-primary/60 rounded-full float-element"></div>
+            <div className="absolute -bottom-4 -right-8 w-5 h-5 bg-secondary/60 rounded-full float-element"></div>
           </div>
         </div>
       </div>
