@@ -13,20 +13,44 @@ const Pricing = () => {
   const [subscription, setSubscription] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true); // Default to annual billing
   const { toast } = useToast();
   const navigate = useNavigate();
 
   // Stripe Price IDs - replace with your actual Stripe price IDs
   const stripePrices = {
-    monthly: "price_1OxxxxxxxxxxxxMONTHLY", // Replace with actual $1 monthly price ID
-    forever: "price_1OxxxxxxxxxxxxFOREVER",  // Replace with actual $99 one-time price ID
+    premiumMonthly: "price_1OxxxxxxxxxxxxMONTHLY", // Replace with actual $2 monthly price ID
+    premiumAnnual: "price_1OxxxxxxxxxxxxANNUAL",   // Replace with actual $1 annual price ID
+    forever: "price_1OxxxxxxxxxxxxFOREVER",        // Replace with actual $99 one-time price ID
   };
+
+  const getPremiumPlan = () => ({
+    name: "Premium",
+    price: isAnnual ? "$1" : "$2",
+    period: isAnnual ? "per year" : "per month",
+    originalPrice: isAnnual ? "$24" : null,
+    description: "Unlock your full potential",
+    features: [
+      "Unlimited guided meditations",
+      "All categories (Sleep, Focus, Anxiety)",
+      "Advanced breathing techniques",
+      "Offline downloads",
+      "Progress analytics",
+      "Daily reminders",
+      "Premium sleep stories"
+    ],
+    buttonText: session ? "Start Premium" : "Sign Up for Premium",
+    popular: true,
+    variant: "default" as const,
+    priceId: isAnnual ? stripePrices.premiumAnnual : stripePrices.premiumMonthly
+  });
 
   const plans = [
     {
       name: "Free",
       price: "$0",
       period: "forever",
+      originalPrice: null,
       description: "Start your mindfulness journey",
       features: [
         "3 guided meditations",
@@ -39,29 +63,12 @@ const Pricing = () => {
       variant: "outline" as const,
       priceId: null
     },
-    {
-      name: "Premium",
-      price: "$1",
-      period: "per month",
-      description: "Unlock your full potential",
-      features: [
-        "Unlimited guided meditations",
-        "All categories (Sleep, Focus, Anxiety)",
-        "Advanced breathing techniques",
-        "Offline downloads",
-        "Progress analytics",
-        "Daily reminders",
-        "Premium sleep stories"
-      ],
-      buttonText: session ? "Start Premium" : "Sign Up for Premium",
-      popular: true,
-      variant: "default" as const,
-      priceId: stripePrices.monthly
-    },
+    getPremiumPlan(),
     {
       name: "Forever",
       price: "$99",
       period: "one-time payment",
+      originalPrice: null,
       description: "Mindfulness for life",
       features: [
         "Everything in Premium",
@@ -235,6 +242,29 @@ const Pricing = () => {
           )}
         </div>
 
+        {/* Billing Toggle */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="flex items-center bg-muted rounded-lg p-1">
+            <Button
+              variant={!isAnnual ? "default" : "ghost"}
+              size="sm"
+              onClick={() => setIsAnnual(false)}
+              className="rounded-md"
+            >
+              Monthly
+            </Button>
+            <Button
+              variant={isAnnual ? "default" : "ghost"}
+              size="sm"
+              onClick={() => setIsAnnual(true)}
+              className="rounded-md"
+            >
+              Annual
+              <Badge variant="secondary" className="ml-2 text-xs">Save 96%</Badge>
+            </Button>
+          </div>
+        </div>
+
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
@@ -269,10 +299,18 @@ const Pricing = () => {
                   <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                   <div className="mt-4">
                     <div className="flex items-center justify-center gap-2">
+                      {plan.originalPrice && (
+                        <span className="text-lg text-muted-foreground line-through">{plan.originalPrice}</span>
+                      )}
                       <span className="text-4xl font-bold text-primary">{plan.price}</span>
                     </div>
                     <div className="mt-2">
                       <span className="text-muted-foreground">/{plan.period}</span>
+                      {plan.originalPrice && (
+                        <div className="mt-1">
+                          <Badge variant="outline" className="text-xs">96% off</Badge>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <p className="text-muted-foreground mt-2">{plan.description}</p>
