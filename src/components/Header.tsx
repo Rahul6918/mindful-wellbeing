@@ -62,7 +62,6 @@ const Header = () => {
     { to: "/discover", label: "Discover" },
     { to: "/meditations", label: "Meditations" },
     { to: "/pricing", label: "Pricing" },
-    ...(session ? [{ to: "/profile", label: "Profile" }] : []),
   ];
 
   return (
