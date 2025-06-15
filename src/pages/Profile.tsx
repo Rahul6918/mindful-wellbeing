@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,9 +6,53 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Calendar, Clock, Award, Settings, TrendingUp } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Profile = () => {
+  const [displayName, setDisplayName] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          navigate("/auth");
+          return;
+        }
+
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("display_name")
+          .eq("user_id", session.user.id)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (profile) {
+          setDisplayName(profile.display_name || "User");
+        } else {
+          setDisplayName("User");
+        }
+      } catch (error: any) {
+        toast({
+          title: "Error loading profile",
+          description: error.message,
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [navigate, toast]);
+
   const stats = [
     { label: "Total Sessions", value: "47", icon: Calendar },
     { label: "Total Time", value: "12h 30m", icon: Clock },
@@ -28,6 +73,17 @@ const Profile = () => {
     { title: "Focus Flow", duration: "15 min", date: "2 days ago" },
   ];
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -37,11 +93,18 @@ const Profile = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
           <Avatar className="h-24 w-24">
             <AvatarImage src="/placeholder.svg" alt="Profile" />
-            <AvatarFallback>JD</AvatarFallback>
+            <AvatarFallback>
+              {displayName
+                .split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase()
+                .slice(0, 2) || "U"}
+            </AvatarFallback>
           </Avatar>
           
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-foreground mb-2">John Doe</h1>
+            <h1 className="text-3xl font-bold text-foreground mb-2">{displayName}</h1>
             <p className="text-muted-foreground mb-4">
               Member since March 2024 • Mindfulness Practitioner
             </p>
