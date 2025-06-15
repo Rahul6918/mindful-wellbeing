@@ -23,7 +23,7 @@ const MeditationCard = ({
   isLocked = false 
 }: MeditationCardProps) => {
   return (
-    <Card className="cursor-pointer group">
+    <Card className="cursor-pointer group h-full flex flex-col">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <Badge variant="secondary" className="text-xs">
@@ -38,8 +38,8 @@ const MeditationCard = ({
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
+      <CardContent className="flex-1 flex flex-col">
+        <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center flex-1">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
             <div className="w-8 h-8 bg-primary rounded-full"></div>
           </div>

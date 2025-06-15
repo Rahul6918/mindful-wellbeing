@@ -24,9 +24,11 @@ const CategorySection = ({
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meditations.map((meditation, index) => <div key={meditation.id}>
+          {meditations.map((meditation, index) => (
+            <div key={meditation.id} className="h-full">
               <MeditationCard id={meditation.id} title={meditation.title} description={meditation.description} duration={meditation.duration} category={meditation.category} isLocked={meditation.isLocked} />
-            </div>)}
+            </div>
+          ))}
         </div>
       </div>
     </section>;
