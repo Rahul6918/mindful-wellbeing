@@ -260,7 +260,7 @@ const Pricing = () => {
               className="rounded-md"
             >
               Annual
-              <Badge variant="secondary" className="ml-2 text-xs">Save 96%</Badge>
+              <Badge variant="secondary" className="ml-2 text-xs">Save 50%</Badge>
             </Button>
           </div>
         </div>
@@ -308,7 +308,7 @@ const Pricing = () => {
                       <span className="text-muted-foreground">/{plan.period}</span>
                       {plan.originalPrice && (
                         <div className="mt-1">
-                          <Badge variant="outline" className="text-xs">96% off</Badge>
+                          <Badge variant="outline" className="text-xs">50% off</Badge>
                         </div>
                       )}
                     </div>
