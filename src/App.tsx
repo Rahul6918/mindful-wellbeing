@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Meditations from "./pages/Meditations";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Player from "./pages/Player";
 import Discover from "./pages/Discover";
 import Pricing from "./pages/Pricing";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/meditations" element={<Meditations />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/player/:id" element={<Player />} />
           <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -104,6 +104,12 @@ const Header = () => {
                       My Profile
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile/edit" className="flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      Edit Profile
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2">
                     <LogOut className="h-4 w-4" />
                     Sign Out
